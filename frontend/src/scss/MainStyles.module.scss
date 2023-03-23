@@ -1,0 +1,27 @@
+// MainStyles.module.scss
+$primary-color: #007bff;
+$background-color: #f8f9fa;
+$font-color: #333333;
+$font-family: "Arial", sans-serif;
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+
+body {
+  font-family: $font-family;
+  background-color: $background-color;
+  color: $font-color;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0 10px;
+  }
+}
+
+

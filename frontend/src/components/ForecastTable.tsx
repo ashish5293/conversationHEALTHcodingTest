@@ -1,6 +1,8 @@
 import React from 'react';
 import {WeatherForecast} from '../entities/WeatherForecast'
-
+import styles from '../scss/TableStyles.module.scss'
+import moment from 'moment'
+import {roundTo2DecimalPlaces} from '../utils/RoundOff'
 interface ForecastTableState {
   forecast: WeatherForecast[] | null;
 }
@@ -53,7 +55,7 @@ class ForecastTable extends React.Component<ForecastTableProps, ForecastTableSta
       <div>
         {
           forecast && (
-            <table>
+            <table className={styles.table}>
               <thead>
               <tr>
                 <th>Date</th>
@@ -67,11 +69,11 @@ class ForecastTable extends React.Component<ForecastTableProps, ForecastTableSta
               <tbody>
               {forecast.map((day) => (
                 <tr key={String(day.date)}>
-                  <td>{day.date.toLocaleString()}</td>
-                  <td>{day.temp - 273.15} °C</td>
-                  <td>{day.tempMin - 273.15} °C</td>
-                  <td>{day.tempMax - 273.15} °C</td>
-                  <td>{day.windSpeed} m/sec</td>
+                  <td>{moment(new Date(day.date)).format("DD MMM, h A")}</td>
+                  <td>{roundTo2DecimalPlaces(day.temp - 273.15)} °C</td>
+                  <td>{roundTo2DecimalPlaces(day.tempMin - 273.15)} °C</td>
+                  <td>{roundTo2DecimalPlaces(day.tempMax - 273.15)} °C</td>
+                  <td>{roundTo2DecimalPlaces(day.windSpeed)} m/sec</td>
                   <td>{day.weatherMain}</td>
                 </tr>
               ))}

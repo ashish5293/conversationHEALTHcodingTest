@@ -1,0 +1,40 @@
+// ButtonStyles.module.scss
+$button-background: #007bff;
+$button-hover-background: #0056b3;
+$button-active-background: #004085;
+$button-color: #ffffff;
+$button-font-size: 14px;
+$button-border-radius: 4px;
+$button-padding: 8px 16px;
+$button-transition: background-color 0.3s ease-in-out;
+
+.button {
+  display: inline-block;
+  background-color: $button-background;
+  color: $button-color;
+  font-size: $button-font-size;
+  text-align: center;
+  text-decoration: none;
+  padding: $button-padding;
+  border: none;
+  border-radius: $button-border-radius;
+  cursor: pointer;
+  transition: $button-transition;
+
+  &:hover {
+    background-color: $button-hover-background;
+  }
+
+  &:active {
+    background-color: $button-active-background;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    background-color: lighten($button-background, 20%);
+    cursor: not-allowed;
+  }
+}

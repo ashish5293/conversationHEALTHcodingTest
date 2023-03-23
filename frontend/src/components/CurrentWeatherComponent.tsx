@@ -1,5 +1,6 @@
 import React from 'react';
 import {CurrentWeather} from '../entities/CurrentWeather'
+import {roundTo2DecimalPlaces} from "../utils/RoundOff";
 
 interface CurrentWeatherState {
   weather: CurrentWeather | null;
@@ -50,8 +51,8 @@ class CurrentWeatherComponent extends React.Component<CurrentWeatherProps, Curre
       <div>
         <h3>{weather.weatherMain}</h3>
         <p>{weather.weatherDescription}</p>
-        <h3>{tempInCelsius} °C</h3>
-        <p>{weather.windSpeed} m/s</p>
+        <h3>Current Temperature: {roundTo2DecimalPlaces(tempInCelsius)} °C</h3>
+        <p>{roundTo2DecimalPlaces(weather.windSpeed)} m/s</p>
       </div>
     );
   }

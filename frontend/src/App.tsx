@@ -3,6 +3,9 @@ import './App.css';
 import CurrentWeatherComponent from "./components/CurrentWeatherComponent";
 import ForecastTable from "./components/ForecastTable";
 import {City} from "./entities/City";
+import listStyles from '../src/scss/DropdownStyles.module.scss'
+import buttonStyles from '../src/scss/ButtonStyles.module.scss';
+import mainStyles from '../src/scss/MainStyles.module.scss';
 
 
 interface AppState {
@@ -46,24 +49,27 @@ export default class App extends React.Component<{}, AppState> {
     const { selectedCityId, showForecast, cities } = this.state;
 
     return (
-      <div>
+      <div className={mainStyles.container}>
         <h1>WEATHER FORECAST</h1>
-        <label htmlFor="city-select">City:</label>
-        <select
-          id="city-select"
-          value={selectedCityId}
-          onChange={(e) => this.setState({ selectedCityId: Number(e.target.value) })}
-        >
-          {cities.map((city) => (
-            <option key={city.id} value={city.id}>
-              {city.name},&nbsp;{city.country}
-            </option>
-          ))}
-        </select>
+        <div className={listStyles.dropdown}>
+          <label>Select CITY</label>
+          <select
+            id="city-select"
+            value={selectedCityId}
+            onChange={(e) => this.setState({ selectedCityId: Number(e.target.value) })}
+          >
+            {cities.map((city) => (
+              <option key={city.id} value={city.id}>
+                {city.name},&nbsp;{city.country}
+              </option>
+            ))}
+          </select>
+        </div>
+
 
         <CurrentWeatherComponent cityId={selectedCityId} />
 
-        <button onClick={this.handleShowForecast}>{showForecast? 'HIDE FORECAST' : 'SEE FORECAST'}</button>
+        <button className={buttonStyles.button} onClick={this.handleShowForecast}>{showForecast? 'HIDE FORECAST' : 'SEE FORECAST'}</button>
         {
           showForecast && <ForecastTable cityId={selectedCityId}/>
         }
