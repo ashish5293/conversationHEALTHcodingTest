@@ -1,4 +1,6 @@
-export const SUPPORTED_CITIES = [
+import { City } from './app/entities/City'
+
+export const SUPPORTED_CITIES: City[] = [
     {
         id: 6167865,
         name: 'Toronto',
