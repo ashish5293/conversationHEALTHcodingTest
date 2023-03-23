@@ -60,7 +60,7 @@ export class App {
                     try {
                         await this.server.close(() => {
                             this.logger.info({
-                                msg: 'Suggestions server shut down successfully',
+                                msg: 'Weather server shut down successfully',
                                 serverRunId: this.serverInitRequestId,
                                 tags: ['start']
                             })

@@ -1,9 +1,11 @@
 import React from 'react';
 import {CurrentWeather} from '../entities/CurrentWeather'
 import {roundTo2DecimalPlaces} from "../utils/RoundOff";
+import LoaderComponent from "./LoaderComponent";
 
 interface CurrentWeatherState {
-  weather: CurrentWeather | null;
+  weather: CurrentWeather | null
+  isLoading: boolean
 }
 
 interface CurrentWeatherProps {
@@ -13,7 +15,8 @@ interface CurrentWeatherProps {
 class CurrentWeatherComponent extends React.Component<CurrentWeatherProps, CurrentWeatherState> {
 
   state: CurrentWeatherState = {
-    weather: null
+    weather: null,
+    isLoading: true
   }
   async componentDidMount() {
     await this.fetchCurrentWeather()
@@ -27,6 +30,7 @@ class CurrentWeatherComponent extends React.Component<CurrentWeatherProps, Curre
 
   private fetchCurrentWeather = async() => {
     try {
+      this.setState({isLoading: true})
       const response = await fetch(`/current/${this.props.cityId}`, {
         method: "GET",
         headers: {
@@ -38,10 +42,12 @@ class CurrentWeatherComponent extends React.Component<CurrentWeatherProps, Curre
       this.setState({ weather: jsonResponse });
     } catch(e) {
       console.log(e)
+    } finally {
+      this.setState({isLoading: false})
     }
   }
   render() {
-    const { weather } = this.state;
+    const { weather, isLoading } = this.state;
 
     if (!weather) return null;
 
@@ -49,10 +55,17 @@ class CurrentWeatherComponent extends React.Component<CurrentWeatherProps, Curre
 
     return (
       <div>
-        <h3>{weather.weatherMain}</h3>
-        <p>{weather.weatherDescription}</p>
-        <h3>Current Temperature: {roundTo2DecimalPlaces(tempInCelsius)} °C</h3>
-        <p>{roundTo2DecimalPlaces(weather.windSpeed)} m/s</p>
+        {
+          isLoading ? (
+            <LoaderComponent />
+          ) :
+            <div>
+              <h3>{weather.weatherMain}</h3>
+              <p>{weather.weatherDescription}</p>
+              <h3>Current Temperature: {roundTo2DecimalPlaces(tempInCelsius)} °C</h3>
+              <p>{roundTo2DecimalPlaces(weather.windSpeed)} m/s</p>
+            </div>
+        }
       </div>
     );
   }

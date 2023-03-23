@@ -1,0 +1,28 @@
+$spinner-color: #007bff;
+$spinner-size: 50px;
+$spinner-animation-duration: 1.2s;
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  &:before {
+    content: '';
+    box-sizing: border-box;
+    display: block;
+    width: $spinner-size;
+    height: $spinner-size;
+    border-radius: 50%;
+    border: 3px solid rgba($spinner-color, 0.2);
+    border-top-color: $spinner-color;
+    animation: spinner $spinner-animation-duration linear infinite;
+  }
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
