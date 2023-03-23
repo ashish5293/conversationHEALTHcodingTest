@@ -7,11 +7,11 @@ import { WeatherController } from './app/controllers/WeatherController'
 import { WeatherService } from './app/services/WeatherService'
 
 if (!process.env.npm_package_name || !process.env.npm_package_version) {
-  /* eslint camelcase: 0 */
-  // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
-  const p = require('../package.json')
-  process.env.npm_package_name = p.name
-  process.env.npm_package_version = p.version
+    /* eslint camelcase: 0 */
+    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+    const p = require('../package.json')
+    process.env.npm_package_name = p.name
+    process.env.npm_package_version = p.version
 }
 
 const kernel = new Container()
@@ -23,16 +23,15 @@ kernel.bind<Logger>(TYPES.Logger).toConstantValue(logger)
 
 //bind controllers
 kernel
-  .bind<WeatherController>(TYPES.Controller)
-  .to(WeatherController)
-  .whenTargetNamed(TYPES.WeatherController)
+    .bind<WeatherController>(TYPES.Controller)
+    .to(WeatherController)
+    .whenTargetNamed(TYPES.WeatherController)
 
 //bind services
 kernel
-  .bind<WeatherService>(TYPES.Service)
-  .to(WeatherService)
-  .inSingletonScope()
-  .whenTargetNamed(TYPES.WeatherService)
-
+    .bind<WeatherService>(TYPES.Service)
+    .to(WeatherService)
+    .inSingletonScope()
+    .whenTargetNamed(TYPES.WeatherService)
 
 export { kernel }

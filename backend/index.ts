@@ -8,15 +8,15 @@ const logger = kernel.get<Logger>(TYPES.Logger)
 const app = new App(+process.env.PORT)
 
 function uncaughtException(err: Error): void {
-  logger.error(err.message, {
-    tags: ['uncaught', 'exception'],
-    stack: err.stack
-  })
-  process.exit(1)
+    logger.error(err.message, {
+        tags: ['uncaught', 'exception'],
+        stack: err.stack
+    })
+    process.exit(1)
 }
 process.on('uncaughtException', uncaughtException)
 process.on('SIGINT', () => {
-  app.stop().then(() => process.exit(0))
+    app.stop().then(() => process.exit(0))
 })
 
 app.start().catch(uncaughtException)
