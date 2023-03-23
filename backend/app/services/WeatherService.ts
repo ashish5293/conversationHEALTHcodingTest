@@ -30,13 +30,13 @@ export class WeatherService {
 
     private static createWeatherResponse(openWeatherApiObject: any): WeatherResponse {
         return {
-            weatherMain: openWeatherApiObject?.weather[0].main,
-            weatherDescription: openWeatherApiObject?.weather[0].description,
-            tempMax: openWeatherApiObject?.main.temp_max,
-            tempMin: openWeatherApiObject?.main.temp_min,
-            temp: openWeatherApiObject?.main.temp,
-            windSpeed: openWeatherApiObject?.wind.speed,
-            date: new Date(Number(openWeatherApiObject?.dt) * 1000)
+            weatherMain: openWeatherApiObject.weather[0].main,
+            weatherDescription: openWeatherApiObject.weather[0].description,
+            tempMax: Number(openWeatherApiObject.main.temp_max),
+            tempMin: Number(openWeatherApiObject.main.temp_min),
+            temp: Number(openWeatherApiObject.main.temp),
+            windSpeed: Number(openWeatherApiObject.wind.speed),
+            date: new Date(Number(openWeatherApiObject.dt) * 1000)
         }
     }
 }

@@ -8,7 +8,7 @@ import { Request } from '../utils/Request'
 import { v4 as uuidv4 } from 'uuid'
 import { SUPPORTED_CITIES } from '../../SupportedCities'
 import { Logger } from 'pino'
-import {WeatherResponse} from "../entities/WeatherResponse";
+import { WeatherResponse } from '../entities/WeatherResponse'
 
 @injectable()
 @Controller('/')
@@ -53,7 +53,10 @@ export class WeatherController {
         req: Request,
         res: Response,
         next: Next,
-        serviceFunction: (requestId: string, cityId: number) => Promise<WeatherResponse[] | WeatherResponse>,
+        serviceFunction: (
+            requestId: string,
+            cityId: number
+        ) => Promise<WeatherResponse[] | WeatherResponse>,
         tag: string
     ): Promise<void> {
         const requestId = uuidv4()

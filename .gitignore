@@ -2,3 +2,5 @@
 /backend/dist
 /backend/build
 /backend/package-lock.json
+/backend/.nyc_output
+/backend/tests/reports
