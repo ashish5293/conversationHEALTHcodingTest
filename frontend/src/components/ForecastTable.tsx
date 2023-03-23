@@ -64,7 +64,7 @@ class ForecastTable extends React.Component<ForecastTableProps, ForecastTableSta
             <div>
               {
                 forecast && (
-                  <table className={styles.table}>
+                  <table className={styles.table} id='forecast-table'>
                     <thead>
                     <tr>
                       <th>Date</th>
